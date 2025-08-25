@@ -1,0 +1,48 @@
+// prisma/schema.prisma
+
+generator client {
+  provider = "prisma-client-js"
+}
+datasource db {
+  provider  = "postgresql"
+  url  	    = env("DATABASE_URL")
+}
+
+model PropertyNFT {
+  id          String   @id @default(uuid())
+  tokenId     Int      @unique 
+  contractId  String   
+  
+  // Property Details
+  title       String
+  description String?  @db.Text
+  location    String
+  price       Decimal  @db.Decimal(15, 2)
+  
+  ownerAddress String
+  creatorAddress String
+  transactionHash String?
+  
+  // Sale Status
+  isForSale   Boolean  @default(false)
+  
+  // Property Specifications
+  bedrooms    Int?
+  bathrooms   Decimal? @db.Decimal(3, 1)
+  squareFeet  Int?
+  yearBuilt   Int?
+  
+  // Additional Features
+  amenities   String[] // Array of amenities
+  
+  // Document & Legal
+  documentHash String  // IPFS hash or document identifier
+  legalStatus Boolean @default(true)
+  
+  // Images
+  images      String
+  
+  // Timestamps
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt()
+}
