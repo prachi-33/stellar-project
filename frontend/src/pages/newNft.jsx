@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { getAddress, isAllowed } from "@stellar/freighter-api";
 import { useEffect } from 'react';
 import toast from 'react-hot-toast';
-import * as Client from '../../packages/property';
+import * as Client from "../../packages/property/src/index.ts";
 
 export default function NewNFT() {
   const contract = new Client.Client({
